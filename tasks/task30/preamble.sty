@@ -1,0 +1,114 @@
+
+%\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+\usepackage{amsthm}
+%\usepackage{mathtools}
+\usepackage{fancyvrb}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{graphicx,xcolor}
+\usepackage{awesomebox}
+\usepackage{hyperref}
+
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{minted}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{thmtools}
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage{multicol}
+\usepackage{longtable}
+
+\usepackage{xunicode} % some extra unicode support
+
+\usepackage[cm-default]{fontspec}
+\setmainfont{Gill Sans}     % задаёт \rmfamily, основной шрифт документа Gill Sans
+\setsansfont{Helvetica Neue}     % задаёт \sffamily, шрифт без засечек
+\setmonofont{Menlo}[Scale=0.8] % задаёт \ttfamily, моношрифт
+%\defaultfontfeatures{Scale=MatchLowercase}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{unicode-math}
+
+\usepackage{tikz}
+
+\usepackage{xcolor} % Required for specifying colors by name
+\definecolor{ocre}{RGB}{243,102,25} % Define the orange color used for highlighting throughout the book
+\definecolor{bgcolor}{rgb}{0.1,0.1,0.1}
+
+\newtheorem{thm}{Теорема}
+\newtheorem{lem}{Лемма}
+\newtheorem{zad}{Задание}
+\theoremstyle{definition}
+\newtheorem{tsk}{}
+\setcounter{tsk}{-1}
+
+
+
+\newtheorem{exa}{Пример}
+%\theoremstyle{thm}
+\newtheorem{defn}{Определение}
+%\newtheorem{alg}{Алгоритм}
+\theoremstyle{remark}
+\newtheorem{rem}{Замечение}
+
+\newcounter{subtask}[tsk]
+\newcommand{\subtask}{\stepcounter{subtask}\asbuk{subtask})}
+
+\titlespacing{\section}
+{0cm}{3ex plus 1ex minus .2ex}{0.4ex plus.2ex}
+\titleformat{\section}[block]
+{\raggedright\Large\bfseries}
+{\thesection.}{1ex}{}
+\titleformat{\subsection}[block]
+{\large\bfseries}
+{\thesubsection.}{1ex}{}
+\titlespacing{\subsection}
+{0cm}{2ex plus 1ex minus .2ex}{.4ex plus.2ex}
+
+\titleformat{\subsubsection}[block]
+{\hspace{\parindent}\normalfont}
+{\thesubsubsection.}{1ex}{}
+\titlespacing{\subsubsection}
+{0cm}{2ex plus 1ex minus .2ex}{.4ex plus.2ex}
+%\renewcommand{\rmdefault}{cmss}
+
+%\setlist{noitemsep}
+%\setlist[1]{labelindent=\parindent} % < Usually a good idea
+\setlist[itemize]{
+%leftmargin=52pt,
+rightmargin=0pt,
+labelsep=7pt,
+labelwidth=20pt,
+itemindent=0pt,
+listparindent=0pt,
+topsep=0pt,%4pt plus 2pt minus 4pt,
+partopsep=0pt,% plus 1pt minus 1pt,
+parsep=0pt,% plus 1pt,
+itemsep=0 pt%\parsep
+}
+
+
+
+\def\bssm{\ttfamily\color{black}\small}
+\def\bsns{\ttfamily\color{black}\normalsize}
+
+
+\setminted{style=native,
+	linenos=false,
+	breaklines=true,
+	numbersep=5pt,
+	tabsize=2,
+	fontsize=\footnotesize,
+	bgcolor=bgcolor}
+\setmintedinline{style=default,
+	bgcolor=white,
+	fontsize=\normalsize
+	}	
+
+\newminted{cpp}{}
+\newminted{sml}{}
+\newmintinline{cpp}{}
+\newmintinline{sml}{}
+\newmintinline{bat}{}
