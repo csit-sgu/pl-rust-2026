@@ -14,27 +14,19 @@ where
 
 #[test]
 fn simple() {
-    assert_eq!(are_equal(&permutations(&[1]), &vec![vec![1]]), true);
-    assert_eq!(
-        are_equal(&permutations(&[1, 2]), &vec![vec![1, 2], vec![2, 1]]),
-        true
-    );
-    assert_eq!(
-        are_equal(
-            &permutations(&[1, 2, 3]),
-            &vec![
-                vec![1, 2, 3],
-                vec![1, 3, 2],
-                vec![2, 1, 3],
-                vec![2, 3, 1],
-                vec![3, 1, 2],
-                vec![3, 2, 1]
-            ]
-        ),
-        true
-    );
+    assert!(are_equal(&permutations(&[1]), &[vec![1]]));
+    assert!(are_equal(&permutations(&[1, 2]), &[vec![1, 2], vec![2, 1]]));
+    assert!(are_equal(
+        &permutations(&[1, 2, 3]),
+        &[
+            vec![1, 2, 3],
+            vec![1, 3, 2],
+            vec![2, 1, 3],
+            vec![2, 3, 1],
+            vec![3, 1, 2],
+            vec![3, 2, 1]
+        ]
+    ));
 
-    permutations(&[
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
-    ]);
+    permutations(&[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
 }
