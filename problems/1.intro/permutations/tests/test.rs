@@ -1,4 +1,4 @@
-use combinations::permutations;
+use permutations::permutations;
 use std::collections::HashSet;
 use std::hash::Hash;
 
