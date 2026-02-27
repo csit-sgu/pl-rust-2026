@@ -1,6 +1,5 @@
 use combinations::combinations;
-use rand::seq::SliceRandom;
-use rand::thread_rng;
+use rand::{rng, seq::SliceRandom};
 
 #[test]
 fn simple() {
@@ -104,7 +103,7 @@ fn bigger_unsorted() {
 
 #[test]
 fn rand_five() {
-    let mut rng = thread_rng();
+    let mut rng = rng();
     let mut arr: Vec<_> = (1..=20).collect();
     arr.shuffle(&mut rng);
     let mut comb = vec![];
