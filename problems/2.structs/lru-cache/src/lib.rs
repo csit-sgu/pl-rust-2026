@@ -7,7 +7,7 @@ pub struct LRUCache<K, V> {
 impl<K, V> LRUCache<K, V> {
     // Создание нового объекта LRUCache от максимального числа элементов
     //
-    // В случае если capacity равен нулю, функция должна вернуть None
+    // В случае если capacity равен нулю, функция должна вызвать панику
     pub fn new(capacity: usize) -> Option<Self> {
         todo!()
     }
