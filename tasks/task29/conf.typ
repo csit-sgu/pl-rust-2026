@@ -16,8 +16,8 @@
     curve.move((-5pt, 16pt)),
     curve.line((15pt, 16pt)),
   )
-  #place(dx: -13pt, dy: -18pt, check-mark(color, height: 1%))
-  #place(dx: -13pt, dy: -11pt, check-mark(color, height: 1%))
+  #place(dx: -13pt, dy: -18pt, check-mark(color, height: 40%))
+  #place(dx: -13pt, dy: -11pt, check-mark(color, height: 40%))
   #place(dx: -12pt, dy: -2pt, circle(fill: color, radius: 2pt))
 ]
 
@@ -25,7 +25,7 @@
   columns: (15pt, 4pt, auto),
   rows: (auto, auto),
   column-gutter: 10pt,
-  icon,
+  block(height: 18pt)[#icon],
   grid.cell(fill: color, block()),
   body,
 )
