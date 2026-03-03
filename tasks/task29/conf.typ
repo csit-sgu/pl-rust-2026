@@ -29,7 +29,7 @@
   columns: (15pt, 4pt, auto),
   rows: (auto, auto),
   column-gutter: 10pt,
-  block(height: 18pt)[#icon],
+  block(height: 18pt, width: 30pt)[#icon],
   grid.cell(fill: color, block()),
   body,
 )
