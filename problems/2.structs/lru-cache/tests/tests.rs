@@ -39,9 +39,8 @@ impl<K: Eq, V> NaiveLRUCache<K, V> {
 }
 
 #[test]
-#[should_panic]
 fn check_zero_capacity() {
-    LRUCache::<i32, i32>::new(0);
+    assert!(LRUCache::<i32, i32>::new(0).is_none());
 }
 
 #[test]
