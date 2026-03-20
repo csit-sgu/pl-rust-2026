@@ -1,6 +1,8 @@
 #import "../globals.typ": *
 
-== Hello, World! 
+= Основы языка
+
+== Hello, World!
 
 ```rust
 #![no_main]
@@ -17,7 +19,7 @@ pub static main: [u32; 9] = [
 ```
 ```sh rustc hello.rs && ./hello ```
 
-#pagebreak()
+---
 
 ```rs
 fn main() {
@@ -28,7 +30,7 @@ fn main() {
 
 ```sh rustc hello.rs && ./hello ```
 
-#pagebreak()
+---
 
 Вариант запуска с `cargo`:
 ```sh
@@ -91,7 +93,7 @@ let x = (let y = 3); // x = y = 3 in C++
 (-92i32).abs()
 ```
 - Нет оператора `++`
-- Нет неявного преобразования над типами, нужно использовать ключевое слово `as` (только для примитивов). 
+- Нет неявного преобразования над типами, нужно использовать ключевое слово `as` (только для примитивов).
 - Переполнение целочисленного типа -- ошибка времени исполнения. Для контроля за поведением переполнения используется `wrapping_add`, `saturating_add` и `overflowing_add`.
 
 == Вывод типов
@@ -119,16 +121,6 @@ let slice: &[i32] = &arr[1..3];
 println!("{:?}", slice);
 ```
 
-== Срезы массивов (slices)
-
-Rust позволяет хранить фрагмент массива в виде среза (slice):
-```rs
-let arr = [10, 20, 30, 40, 50];
-let slice = &arr[0..4]; 
-assert_eq!(mem::size_of_val(&arr)), 20);
-assert_eq!(mem::size_of_val(&slice)), 16);
-```
-
 У срезов особое значение в контексте системы типов Rust.
 
 == Динамические массивы
@@ -145,18 +137,6 @@ let a = vec![1, 3];
 
 Это аналог `std::vector` из C++.
 
-== Строки и срезы строк
-
-В Rust "владеющие" строки представляются типом `String`:
-```rs
-let alice = String::from("Alice");
-let almost_slice = &alice[1..];
-let s = String::from('s');
-let slices = [&s[..], almost_slice, &s[..]].concat();
-println!("{}", slices);
-```
-Строки — тоже массивы, поэтому от них можно брать срез `&str`.
-
 == Блоки
 
 Важно, что блок в Rust -- является выражением:
@@ -168,7 +148,7 @@ let x = {
 println!("{}", x);
 ```
 
-#pagebreak()
+---
 
 ```rs
 let omelet = {
@@ -180,95 +160,7 @@ let omelet = {
 
 Тип по умолчанию -- `()`, он же unit.
 
-== Владение
-Одной из ключевых концепций в Rust является модель владения.
-- Каждое значение в Rust имеет своего владельца (переменную, поле, аргумент функции)
-- В один момент может быть только один владелец
-- Когда владелец выходит из области видимости, то захваченный ресурс освобождается
-
-#codly(display-name: false)
-#slide(composer: (1fr, 1fr))[
-```rs
-let x = 3;
-let y = x; // Копирование
-```
-][
-```cpp
-int x = 3;
-int y = x; // Копирование
-```
-]
-
-#pagebreak()
-
-```rs
-#[derive(Clone, Copy)]
-struct Point { x: f64, y: f64 }
-```
-
-Агрегаты из `Copy` типов тоже могут быть `Copy`. 
-
-#pagebreak()
-
-#slide(composer: (1fr, 1fr))[
-
-#codly(highlights: (
-  (line: 3, fill: red, start: 0, tag: "❌"),
-))
-```rs
-let x = String::from("s");
-let y = x;
-println!("{}", x);
-```
-][
-#codly(highlights: (
-  (line: 3, fill: green, start: 0, tag: "✅"),
-))
-```cpp
-auto x = std::string("s");
-auto y = x; // Копирование
-std::cout << x;
-```
-]
-#codly(display-name: true)
-
-#pagebreak()
-
-== Жизнь без ссылок
-
-#codly(highlights: (
-  (line: 8, fill: red, start: 0, tag: "❌"),
-))
-```rs
-fn print_vec(xs: Vec<i32>) {
-  for x in xs { println!("{}", x); }
-}
-
-fn main() {
-  let xs = vec![1, 2, 3];
-  print_vec(xs);
-  print_vec(xs); // Ошибка: value used after move
-}
-```
-
-== Ссылки
-
-- не могут быть `NULL`
-- гарантируют, что объект жив
-
-```rs
-let r: &mut i32 = &mut 92; // Любопытным: каким образом мы берём ссылку на константу?
-*r += 1;
-```
-
-Берём ссылку на объект -- значит заимствуем его (borrow). 
-
-Выделение памяти на куче выполняется с помощью `Box`.
-```rs
-let x = Box::new(42);
-```
-
-== Цикл
+== Циклы
 
 Кроме привычных `for` и `while` в Rust есть бесконечный цикл -- `loop`.
 
@@ -301,7 +193,7 @@ println!("{}", init)
 ```
 ]
 
-#pagebreak()
+---
 
 Можно делать `break` на метки
 
@@ -325,7 +217,7 @@ let from_loop = loop {
 
 Актуально для `if`, `match`, `{}`, `loop` в сочетании с `break`.
 
-#pagebreak()
+---
 
 == !
 
@@ -339,7 +231,7 @@ let x: ! = loop {}
 let x: u32 = loop {}
 ```
 
-#pagebreak()
+---
 
 == Аварийное завершение программы
 
@@ -354,4 +246,138 @@ unimplemented!()
 Код недостижим
 ```rs
 unreachable!()
+```
+
+== Владение
+Одной из ключевых концепций в Rust является модель владения.
+- Каждое значение в Rust имеет своего владельца (переменную, поле, аргумент функции)
+- В один момент может быть только один владелец
+- Когда владелец выходит из области видимости, то захваченный ресурс освобождается
+
+#codly(display-name: false)
+#slide(composer: (1fr, 1fr))[
+```rs
+let x = 3;
+let y = x; // Копирование
+```
+][
+```cpp
+int x = 3;
+int y = x; // Копирование
+```
+]
+
+---
+
+```rs
+#[derive(Clone, Copy)]
+struct Point { x: f64, y: f64 }
+```
+
+Агрегаты из `Copy` типов тоже могут быть `Copy`.
+
+---
+
+#slide(composer: (1fr, 1fr))[
+
+#codly(highlights: (
+  (line: 3, fill: red, start: 0, tag: "❌"),
+))
+```rs
+let x = String::from("s");
+let y = x;
+println!("{}", x);
+```
+][
+#codly(highlights: (
+  (line: 3, fill: green, start: 0, tag: "✅"),
+))
+```cpp
+auto x = std::string("s");
+auto y = x; // Копирование
+std::cout << x;
+```
+]
+#codly(display-name: true)
+
+---
+
+== Жизнь без ссылок
+
+#codly(highlights: (
+  (line: 8, fill: red, start: 0, tag: "❌"),
+))
+```rs
+fn print_vec(xs: Vec<i32>) {
+  for x in xs { println!("{}", x); }
+}
+
+fn main() {
+  let xs = vec![1, 2, 3];
+  print_vec(xs);
+  print_vec(xs); // Ошибка: value used after move
+}
+```
+
+== Ссылки
+
+- не могут быть `NULL`
+- гарантируют, что объект жив
+
+```rs
+let r: &mut i32 = &mut 92; // Любопытным: каким образом мы берём ссылку на константу?
+*r += 1;
+```
+
+Берём ссылку на объект -- значит заимствуем его (borrow).
+
+Выделение памяти на куче выполняется с помощью `Box`.
+```rs
+let x = Box::new(42);
+```
+
+== Срезы массивов (slices)
+
+Rust позволяет хранить фрагмент массива в виде среза (slice):
+```rs
+let arr = [10, 20, 30, 40, 50];
+let slice = &arr[0..4];
+assert_eq!(mem::size_of_val(&arr)), 20);
+assert_eq!(mem::size_of_val(&slice)), 16);
+```
+
+== Строки и срезы строк
+
+В Rust "владеющие" строки представляются типом `String`:
+```rs
+let alice = String::from("Alice");
+let almost_slice = &alice[1..];
+let s = String::from('s');
+let slices = [&s[..], almost_slice, &s[..]].concat();
+println!("{}", slices);
+```
+Строки — тоже массивы, поэтому от них можно брать срез `&str`.
+
+== Ссылки на ссылки
+
+```rs
+#[derive(Debug, Clone)]
+struct T {
+    i: i32,
+}
+
+fn f<'a>(rf: &mut &'a T, another: &'a T) {
+    *rf = another;
+}
+
+fn main() {
+    let a = T { i: 0 };
+    let b = T { i: 1 };
+
+    let mut a_ref = &a;
+
+    f(&mut a_ref, &b);
+
+    println!("{:?}", a_ref);
+}
 ```
