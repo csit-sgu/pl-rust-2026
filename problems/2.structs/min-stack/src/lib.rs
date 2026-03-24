@@ -5,7 +5,7 @@ pub struct MinStack<T> {
 }
 
 impl<T> MinStack<T> {
-    // Создание нового объекта MinStack с пустой очередью.
+    // Создание нового объекта MinStack с пустым стеком.
     pub fn new() -> Self {
         todo!()
     }
@@ -47,7 +47,7 @@ impl<T> MinStack<T> {
         todo!()
     }
 
-    // Проверка, пуста ли очередь.
+    // Проверка, пуст ли стек.
     //
     // Ожидаемое время работы: O(1)
     pub fn is_empty(&self) -> bool {
