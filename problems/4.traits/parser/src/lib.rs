@@ -45,7 +45,8 @@ struct FileParserFactory {
 // TODO: используя FileParserFactory реализуйте данную функцию
 // Парсит все файы из списка путей нужным парсером, если это возможно
 // и возвращаем результат попытки парсинга для каждого файла
-pub fn try_parse_files<P: AsRef<Path>>(paths: &[P]) -> Vec<Result<Table, Errors>> {
+// NOTE: оно ругается т.к. вместо реализации макрос todo!
+pub fn try_parse_files<P: AsRef<Path>>(paths: &[P]) -> impl Iterator<Item = Result<Table, Errors>> {
     todo!()
 }
 
@@ -69,7 +70,7 @@ impl FromStr for ParserType {
     }
 }
 
-// NOTE: здесь тоже стоит вместо реализации todo!() накинуть, но не знаю на что именно
+// FIX: здесь тоже стоит вместо реализации todo!() накинуть, но не знаю на что именно
 pub enum Errors {
     Io(io::Error),
     Parser(ParserError),
@@ -113,10 +114,7 @@ impl fmt::Display for ParserError {
     fn fmt(&self, formmater: &mut fmt::Formatter<'_>) -> fmt::Result {
         match &self.kind {
             ParseErrorKind::IncorrectFormatData => {
-                writeln!(
-                    formmater,
-                    "Некорректный формат данных для данного парсера.",
-                )
+                writeln!(formmater, "Некорректный формат данных для данного парсера.",)
             }
             ParseErrorKind::NotImplemented => {
                 writeln!(formmater, "Парсер для данного типа файла не реализован.",)
