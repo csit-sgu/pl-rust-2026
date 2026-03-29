@@ -177,13 +177,13 @@ mod tests {
         let bad_path = "test_bad_path.csv";
 
         let paths = vec![csv_path, tsv_path, json_path, csv_path, bad_path, tsv_path];
-        let results = try_parse_files(&paths);
-        assert!(results[0].is_ok());
-        assert!(results[1].is_ok());
-        assert!(results[2].is_err());
-        assert!(results[3].is_ok());
-        assert!(results[4].is_err());
-        assert!(results[5].is_ok());
+        let mut results = try_parse_files(&paths);
+        assert!(results.next().unwrap().is_ok());
+        assert!(results.next().unwrap().is_ok());
+        assert!(results.next().unwrap().is_err());
+        assert!(results.next().unwrap().is_ok());
+        assert!(results.next().unwrap().is_err());
+        assert!(results.next().unwrap().is_ok());
 
         let _ = std::fs::remove_file(tsv_path);
         let _ = std::fs::remove_file(csv_path);
