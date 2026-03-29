@@ -196,6 +196,35 @@ fn compute(input: &u32, output: &mut u32) {
 
 ---
 
+// TODO: надо выбрать один из этих двух вариантов
+```rs
+struct Node { value: i32, }
+fn another_func(_value: &i32) { todo!() }
+
+fn some_func(mut storage: Vec<Node>, index: usize, value: i32) {
+    let node = &mut storage[index]; // Мутабельная ссылка на элемент storage
+    another_func(&node.value); // НЕМУТАБЕЛЬНАЯ ссылка на поле элемента
+    node.value = value; // Используем мутабельную ссылку
+}
+```
+
+```rs
+    fn rewrite(&mut self, key: K, value: V) -> Option<V> {
+        let tail = self.tail.expect("Что-то пошло не так");
+        let tail_node = &mut self.storage[tail]; // Мутабельная ссылка на элемент storage
+
+        self.cache.remove(&tail_node.key); // НЕМУТАБЕЛЬНАЯ ссылка на поле элемента
+        self.cache.insert(key.clone(), tail);
+
+        tail_node.key = key; // Используем мутабельную ссылку
+        tail_node.value = value;
+
+        self.touch(tail);
+        None
+    }
+```
+#pagebreak()
+
 Правило №3. Объект, на который существует хотя бы одна ссылка фактически "заморожен". Его нельзя модифицировать ни откуда за исключением самой ссылки.
 
 #slide(composer: (1fr, 1fr))[
