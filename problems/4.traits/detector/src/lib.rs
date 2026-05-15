@@ -1,8 +1,4 @@
 #![forbid(unsafe_code)]
-use reqwest::blocking::Client;
-use std::fs::File;
-use std::io::Write;
-use std::process::Command;
 
 // Трейт Pinger
 pub trait Pinger {
@@ -14,53 +10,20 @@ pub trait Writer {
     // TODO: Объявите функцию write согласно условию
 }
 
-// Реализация через системный ping
+// Если необходимо, структуры могут иметь в себе приватные поля
 pub struct SystemPinger;
 
-impl Pinger for SystemPinger {
-    // TODO
-}
+pub struct TcpPinger;
 
-// Реализация через Reqwest
-// Структура содержит одно поле: созданный при инициализации клиент
-pub struct ReqwestPinger {
-    client: Client,
-}
+pub struct ReqwestPinger;
 
-impl ReqwestPinger {
-    pub fn new() -> Self {
-        // client должен принять некоторое значение
-        todo!()
-    }
-}
-
-impl Pinger for ReqwestPinger {
-    // TODO
-}
-
-// Реализация Writer для консоли
 pub struct ConsoleWriter;
 
-impl Writer for ConsoleWriter {
-    // TODO
-}
+pub struct FileWriter;
 
-// Реализация Writer для файла
-// Структура содержит одно поле: адрес файла для записи
-pub struct FileWriter {
-    path: String,
-}
+pub struct PingerWrapper;
 
-impl FileWriter {
-    pub fn new(path: String) -> Self {
-        todo!()
-    }
-}
-
-impl Writer for FileWriter {
-    // TODO
-}
+// TODO: Опишите необходимые реализации трейтов для каждой структуры
 
 // Основная функция для проверки сайтов и вывода
 // TODO: Опишите функцию check_and_report самостоятельно
-
