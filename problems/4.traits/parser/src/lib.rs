@@ -1,6 +1,5 @@
 #![forbid(unsafe_code)]
 use std::{
-    char,
     collections::HashMap,
     fmt::{self, Debug},
     fs::File,
@@ -33,9 +32,8 @@ impl Parser for TsvParser {
 
 
 // TODO: Парсит все файы из списка путей нужным парсером, если это возможно
-// и возвращаем результат попытки парсинга для каждого файла
-// NOTE: оно ругается т.к. вместо реализации макрос todo!
-pub fn try_parse_files<P: AsRef<Path>>(paths: &[P]) -> impl Iterator<Item = Result<Table, Error>> {
+// и возвращает результат попытки парсинга для каждого файла
+pub fn try_parse_files<P: AsRef<Path>>(paths: &[P]) -> Vec<Result<Table, Error>> {
     todo!()
 }
 
@@ -59,7 +57,6 @@ impl FromStr for ParserType {
     }
 }
 
-// FIX: здесь тоже стоит вместо реализации todo!() накинуть, но не знаю на что именно
 #[derive(Debug)]
 pub enum Error {
     Io(io::Error),
