@@ -202,18 +202,6 @@ fn compute(input: &u32, output: &mut u32) {
 
 #pagebreak()
 
-// TODO: надо выбрать один из этих двух вариантов
-```rs
-struct Node { value: i32, }
-fn another_func(_value: &i32) { todo!() }
-
-fn some_func(mut storage: Vec<Node>, index: usize, value: i32) {
-    let node = &mut storage[index]; // Мутабельная ссылка на элемент storage
-    another_func(&node.value); // НЕМУТАБЕЛЬНАЯ ссылка на поле элемента
-    node.value = value; // Используем мутабельную ссылку
-}
-```
-
 ```rs
     fn rewrite(&mut self, key: K, value: V) -> Option<V> {
         let tail = self.tail.expect("Что-то пошло не так");
